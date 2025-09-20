@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  hospital-optimizer-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    networks:
+      - hospital-optimizer-network
+
+networks:
+  hospital-optimizer-network:
+    driver: bridge

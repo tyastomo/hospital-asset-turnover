@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  hospital-optimizer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      # Mount source code for development (hot reload)
+      - .:/app
+      - /app/node_modules
+    restart: unless-stopped
+    networks:
+      - hospital-optimizer-network
+
+networks:
+  hospital-optimizer-network:
+    driver: bridge
